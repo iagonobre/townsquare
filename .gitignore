@@ -1,0 +1,26 @@
+# Build
+bin/
+obj/
+
+# SQLite database (local only)
+*.db
+*.db-shm
+*.db-wal
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+
+# Logs
+*.log
+
+# Temporary ASP.NET files
+**/Properties/launchSettings.json
+
+# Published output
+wwwroot/lib/
