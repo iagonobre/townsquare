@@ -10,4 +10,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         : base(options)
     {
     }
+    
+    public DbSet<Event> Events { get; set; }
+    public DbSet<RSVP> Rsvps { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
 }
