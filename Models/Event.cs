@@ -15,4 +15,6 @@ public class Event
     public string CreatorId { get; set; }
     public ApplicationUser Creator { get; set; }
     public bool IsOrphaned { get; set; } = false;
+    
+    public ICollection<RSVP> Rsvps { get; set; } = new List<RSVP>();
 }

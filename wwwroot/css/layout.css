@@ -1,0 +1,78 @@
+.ts-header {
+    width: 100%;
+    padding: 2rem 0;
+}
+
+.page-container-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.ts-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.ts-logo {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #111;
+}
+
+.ts-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.6rem;
+}
+
+.ts-menu .active {
+    font-weight: 700;
+}
+
+.ts-menu a {
+    font-weight: 500;
+}
+
+.ts-menu-pages {
+    display: flex;
+    gap: 2rem;
+    margin-right: 2.5rem;
+}
+
+.login-btn {
+    color: #000000;
+    margin-right: 1rem;
+}
+
+.signup-btn {
+    padding: 0.8rem 2rem;
+    background: #7848F3;
+    color: #FFFFFF;
+    border-radius: 8px;
+}
+
+.ts-icon-btn img {
+    width: 36px;
+    height: 36px;
+    padding: 0.6rem;
+    border-radius: 10px;
+    background: #D8CEFA;
+}
+
+.ts-profile-btn img {
+    background: #7848F3;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
