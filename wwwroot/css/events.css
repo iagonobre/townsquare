@@ -38,6 +38,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 2.4rem;
+    margin-top: 2rem;
 }
 
 .event-card {
@@ -138,6 +139,7 @@
     flex-direction: column;
 }
 
+
 .my-events-empty {
     flex: 1;                         
     display: flex;
@@ -150,6 +152,10 @@
 .my-events-empty h3 {
     font-size: 2rem;
     font-weight: 700;
+}
+
+.my-events-empty p {
+    color: #666;
 }
 
 .delete-card-form {
