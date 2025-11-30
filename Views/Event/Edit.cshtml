@@ -1,38 +1,38 @@
 @model Townsquare.Models.Event
 
 @{
-    ViewData["Title"] = "Create Event";
+    ViewData["Title"] = "Edit Event";
 }
 
 <div class="create-container">
 
-    <h2 class="create-title">Create Event</h2>
-    
-    <form asp-action="Create"
+    <h2 class="create-title">Edit Event</h2>
+
+    <form asp-action="Edit"
           method="post"
           enctype="multipart/form-data"
           class="create-form">
+
+        <input type="hidden" asp-for="Id" />
 
         <div asp-validation-summary="All" class="validation-summary"></div>
 
         <div class="create-field">
             <label class="create-label">Event Name</label>
-            <input asp-for="Title" class="create-input" placeholder="Enter the event name" />
+            <input asp-for="Title" class="create-input" />
             <span asp-validation-for="Title" class="validation-error"></span>
         </div>
 
         <div class="create-field">
             <label class="create-label">Description</label>
             <textarea asp-for="Description"
-                      class="create-textarea"
-                      placeholder="Describe your event"></textarea>
+                      class="create-textarea"></textarea>
             <span asp-validation-for="Description" class="validation-error"></span>
         </div>
 
         <div class="create-field">
             <label class="create-label">Category</label>
             <select asp-for="Category" class="create-input">
-                <option value="">Select a category</option>
                 <option>Music</option>
                 <option>Food & Drinks</option>
                 <option>Sports</option>
@@ -47,13 +47,17 @@
         </div>
 
         <div class="create-field">
-            <label class="create-label">Banner Image</label>
+            <label class="create-label">Current Banner</label>
+            <img src="@Model.ImageUrl" style="width:100%; border-radius:12px; margin-bottom:1rem;" />
+        </div>
+
+        <div class="create-field">
+            <label class="create-label">Replace Banner (optional)</label>
 
             <input type="file"
                    name="imageFile"
                    accept="image/*"
                    class="create-input" />
-            <span asp-validation-for="ImageUrl" class="validation-error"></span>
 
             <div class="create-banner">
                 <img src="~/icons/image.svg" class="banner-icon" />
@@ -70,24 +74,24 @@
         <div class="create-row">
             <div class="create-field">
                 <label class="create-label">Country</label>
-                <input asp-for="Country" class="create-input" placeholder="Country" />
+                <input asp-for="Country" class="create-input" />
                 <span asp-validation-for="Country" class="validation-error"></span>
             </div>
 
             <div class="create-field">
                 <label class="create-label">Region</label>
-                <input asp-for="Region" class="create-input" placeholder="Region / State" />
+                <input asp-for="Region" class="create-input" />
                 <span asp-validation-for="Region" class="validation-error"></span>
             </div>
         </div>
 
         <div class="create-field">
             <label class="create-label">Street Address</label>
-            <input asp-for="Address" class="create-input" placeholder="Street address" />
+            <input asp-for="Address" class="create-input" />
             <span asp-validation-for="Address" class="validation-error"></span>
         </div>
 
-        <button type="submit" class="ts-btn create-submit">Create Event</button>
+        <button type="submit" class="ts-btn create-submit">Save Changes</button>
     </form>
 </div>
 

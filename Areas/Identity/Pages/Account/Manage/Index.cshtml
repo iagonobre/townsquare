@@ -12,6 +12,12 @@
 
     <form id="profile-form" method="post" class="manage-form">
         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+        
+        <div class="manage-field">
+            <label asp-for="Input.FullName" class="manage-label">Full Name</label>
+            <input asp-for="Input.FullName" class="manage-input" placeholder="Your full name" />
+            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+        </div>
 
         <div class="manage-field">
             <label asp-for="Username" class="manage-label">Username</label>

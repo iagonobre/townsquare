@@ -25,6 +25,9 @@ namespace Townsquare.Areas.Identity.Pages.Account.Manage
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        
+         
+
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -52,6 +55,9 @@ namespace Townsquare.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public class InputModel
         {
+            
+            [Display(Name = "Full Name")]
+            public string FullName { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -70,6 +76,7 @@ namespace Townsquare.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                FullName = user.FullName,
                 PhoneNumber = phoneNumber
             };
         }
@@ -89,6 +96,9 @@ namespace Townsquare.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+            
+         
+            
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -99,6 +109,9 @@ namespace Townsquare.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
+
+            user.FullName = Input.FullName;
+            await _userManager.UpdateAsync(user);
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)

@@ -1,0 +1,66 @@
+.create-container {
+    max-width: 720px;
+    margin: auto;
+    padding: 2rem;
+}
+
+.create-title {
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.create-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-label {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.create-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.create-banner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem;
+    border: 1px dashed #C6BBFA;
+    border-radius: 10px;
+    background: #faf7ff;
+    margin-top: 1rem;
+}
+
+
+.create-textarea {
+    resize: vertical;
+    max-height: 280px;       
+    overflow-y: auto;
+}
+
+.banner-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.create-submit {
+    width: 100%;
+    margin-top: 1.6rem;
+}
+
+.validation-error {
+    color: red;
+}

@@ -1,0 +1,186 @@
+.my-events-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+
+    padding: 1rem 1.6rem;
+    background: #7848F3;
+    color: #fff;
+
+    border: none;
+    border-radius: 12px;
+
+    font-size: 1.6rem;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.my-events-btn:hover {
+    background: #6a3be0;
+}
+
+.icon-add {
+    width: 24px;
+    height: 24px;
+}
+
+.my-events-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 2.4rem;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.4rem;
+}
+
+.event-card {
+    padding: 0;
+    overflow: hidden;
+    border-radius: 14px;
+    position: relative;
+}
+
+.event-card-banner img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.event-card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1.5rem;
+}
+
+.event-card-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    background: #D8CEFA;
+    padding: 0.8rem;
+    border-radius: 10px;
+}
+
+.event-card-info-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.event-card-attending {
+    color: #616367;
+    background: none;
+}
+
+.event-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.event-card-title {
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-left: 1.5rem;
+}
+
+.event-card-description {
+    font-size: 1.4rem;
+    padding: 0 1.4rem 1rem;
+    color: #616367;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;  
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+.event-card-buttons {
+    display: flex;
+    gap: 1rem;
+    padding: 1.2rem 1.4rem 1.6rem;
+}
+
+.event-card-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.8rem 1rem;
+    background: #e9ddff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    color: #7848F3;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.event-card-btn:hover {
+    background: #d9caff;
+}
+
+.my-events-container {
+    margin: 0 auto;                   
+    display: flex;
+    flex-direction: column;
+}
+
+.my-events-empty {
+    flex: 1;                         
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center; !important;
+}
+
+.my-events-empty h3 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.delete-card-form {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.delete-icon-btn {
+    background: #F0F0FC;
+    border: 1px solid #ddd;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transition: 0.2s ease;
+}
+
+.delete-icon-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.delete-icon-btn:hover {
+    background: #ffe6e6;
+    border-color: #ffb3b3;
+    box-shadow: 0 2px 8px rgba(255,0,0,0.3);
+}
+
+

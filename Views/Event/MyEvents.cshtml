@@ -1,0 +1,86 @@
+@model IEnumerable<Townsquare.Models.Event>
+
+@{
+    ViewData["Title"] = "My Events";
+}
+
+<div class="my-events-container">
+
+    <div class="my-events-header">
+        <a asp-controller="Event" asp-action="Create" class="my-events-btn">
+            <span>New Event</span>
+            <img src="~/icons/add.svg" class="icon-add" alt="Add" />
+        </a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="my-events-empty">
+            <h3>No events yet</h3>
+            <p>Create an event to get started.</p>
+
+        </div>
+    }
+    else
+    {
+        <div class="events-grid">
+
+            @foreach (var ev in Model)
+            {
+                <div class="event-card card">
+                    
+                    <form asp-controller="Event"
+                          asp-action="Delete"
+                          asp-route-id="@ev.Id"
+                          method="post"
+                          onsubmit="return confirm('Delete this event?');"
+                          class="delete-card-form">
+                        <button type="submit" class="delete-icon-btn">
+                            <img src="~/icons/trash.svg" alt="Delete"/>
+                        </button>
+                    </form>
+
+
+                    <div class="event-card-banner">
+                        <img src="@ev.ImageUrl" alt="@ev.Title"/>
+                    </div>
+
+                    <div class="event-card-container">
+                        <di class="event-card-info-container">
+                            <div class="event-card-info">
+                                <img src="~/icons/calendar.svg" class="event-icon"/>
+                                @ev.Date.ToString("yyyy-MM-dd")
+                            </div>
+
+                            <div class="event-card-info">
+                                <img src="~/icons/clock.svg" class="event-icon"/>
+                                @ev.Date.ToString("HH:mm")
+                            </div>
+                        </di>
+
+
+                        <div class="event-card-attending">
+                            @ev.Rsvps.Count attending
+                        </div>
+                    </div>
+
+                    <h3 class="event-card-title">@ev.Title</h3>
+
+                    <p class="event-card-description">@ev.Description</p>
+
+                    <div class="event-card-buttons">
+                        <button class="event-card-btn">View RSVP List</button>
+                        <a asp-controller="Event"
+                           asp-action="Edit"
+                           asp-route-id="@ev.Id"
+                           class="event-card-btn">
+                            Edit Event
+                        </a>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+</div>

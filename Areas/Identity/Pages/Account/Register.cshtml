@@ -11,6 +11,12 @@
     <form id="registerForm" method="post" asp-route-returnUrl="@Model.ReturnUrl" class="auth-form">
 
         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+        
+        <div class="auth-field">
+            <label asp-for="Input.FullName" class="auth-label">Full Name</label>
+            <input asp-for="Input.FullName" class="auth-input" placeholder="John Doe" />
+            <span asp-validation-for="Input.FullName" class="text-danger"></span>
+        </div>
 
         <div class="auth-field">
             <label asp-for="Input.Email" class="auth-label">Email</label>

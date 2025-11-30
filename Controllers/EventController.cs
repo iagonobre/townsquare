@@ -25,11 +25,23 @@ public class EventController : Controller
     }
     
     [HttpPost]
-    public async Task<IActionResult> Create(Event model)
+    public async Task<IActionResult> Create(Event model, IFormFile imageFile)
     {
+        if (imageFile == null || imageFile.Length == 0)
+        {
+            ModelState.AddModelError("ImageUrl", "An image is required.");
+        }
+
         if (!ModelState.IsValid)
             return View(model);
 
+        var fileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+
+        await using (var stream = new FileStream(filePath, FileMode.Create))
+            await imageFile.CopyToAsync(stream);
+
+        model.ImageUrl = "/uploads/" + fileName;
         model.CreatorId = _userManager.GetUserId(User)!;
 
         _context.Events.Add(model);
@@ -37,6 +49,8 @@ public class EventController : Controller
 
         return RedirectToAction("MyEvents");
     }
+
+
     
     [AllowAnonymous]
     public async Task<IActionResult> Details(int id)
@@ -66,25 +80,32 @@ public class EventController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(int id, Event model)
+    public async Task<IActionResult> Edit(int id, Event model, IFormFile? imageFile)
     {
         if (id != model.Id)
             return BadRequest();
-
-        if (!ModelState.IsValid)
-            return View(model);
 
         var ev = await _context.Events.FindAsync(id);
         if (ev == null)
             return NotFound();
 
-        if (ev.CreatorId != _userManager.GetUserId(User))
-            return Forbid();
+        if (!ModelState.IsValid)
+            return View(model);
+
+        if (imageFile != null && imageFile.Length > 0)
+        {
+            var fileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
+
+            await using var stream = new FileStream(filePath, FileMode.Create);
+            await imageFile.CopyToAsync(stream);
+
+            ev.ImageUrl = "/uploads/" + fileName;
+        }
 
         ev.Title = model.Title;
         ev.Description = model.Description;
         ev.Category = model.Category;
-        ev.ImageUrl = model.ImageUrl;
         ev.Date = model.Date;
         ev.Country = model.Country;
         ev.Region = model.Region;
@@ -94,22 +115,8 @@ public class EventController : Controller
 
         return RedirectToAction("MyEvents");
     }
-    
-    public async Task<IActionResult> Delete(int id)
-    {
-        var ev = await _context.Events.FindAsync(id);
-        if (ev == null)
-            return NotFound();
 
-        if (ev.CreatorId != _userManager.GetUserId(User))
-            return Forbid();
-
-        _context.Events.Remove(ev);
-        await _context.SaveChangesAsync();
-
-        return RedirectToAction("MyEvents");
-    }
-
+   
     public async Task<IActionResult> MyEvents()
     {
         var userId = _userManager.GetUserId(User)!;
@@ -124,21 +131,20 @@ public class EventController : Controller
     }
     
     [HttpPost]
-    public async Task<IActionResult> DeleteMany(int[] ids)
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Delete(int id)
     {
         var userId = _userManager.GetUserId(User)!;
 
-        var eventsToDelete = await _context.Events
-            .Where(e => ids.Contains(e.Id) && e.CreatorId == userId)
-            .ToListAsync();
+        var ev = await _context.Events
+            .FirstOrDefaultAsync(e => e.Id == id && e.CreatorId == userId);
 
-        if (eventsToDelete.Count == 0)
-            return RedirectToAction("MyEvents");
+        if (ev == null)
+            return NotFound();
 
-        _context.Events.RemoveRange(eventsToDelete);
+        _context.Events.Remove(ev);
         await _context.SaveChangesAsync();
 
         return RedirectToAction("MyEvents");
     }
-
 }

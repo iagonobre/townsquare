@@ -70,7 +70,7 @@
 
     <ItemGroup>
       <Folder Include="Areas\Identity\Pages\Account\Manage\" />
-      <Folder Include="wwwroot\icons\" />
+      <Folder Include="wwwroot\uploads\" />
     </ItemGroup>
 
 </Project>
