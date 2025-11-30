@@ -1,0 +1,45 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="auth-container">
+
+    <h1 class="auth-title">Create your account</h1>
+
+    <form id="registerForm" method="post" asp-route-returnUrl="@Model.ReturnUrl" class="auth-form">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+        <div class="auth-field">
+            <label asp-for="Input.Email" class="auth-label">Email</label>
+            <input asp-for="Input.Email" class="auth-input" placeholder="Enter your email"/>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="auth-field">
+            <label asp-for="Input.Password" class="auth-label">Password</label>
+            <input asp-for="Input.Password" class="auth-input" type="password" placeholder="Create a password"/>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <div class="auth-field">
+            <label asp-for="Input.ConfirmPassword" class="auth-label">Confirm Password</label>
+            <input asp-for="Input.ConfirmPassword" class="auth-input" type="password" placeholder="Repeat your password"/>
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <button id="registerSubmit" type="submit" class="ts-btn auth-btn-big">Register</button>
+
+        <div class="auth-links">
+            <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already have an account? Log in</a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

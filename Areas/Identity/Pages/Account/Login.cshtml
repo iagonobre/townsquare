@@ -1,0 +1,48 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="auth-container">
+
+    <h1 class="auth-title">Log in</h1>
+
+    <form id="account" method="post" class="auth-form">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+        <div class="auth-field">
+            <label asp-for="Input.Email" class="auth-label">Email</label>
+            <input asp-for="Input.Email" class="auth-input" placeholder="Enter your email"/>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="auth-field">
+            <label asp-for="Input.Password" class="auth-label">Password</label>
+            <input asp-for="Input.Password" type="password" class="auth-input" placeholder="Enter your password"/>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <div class="auth-remember">
+            <input asp-for="Input.RememberMe" class="auth-checkbox" />
+            <label asp-for="Input.RememberMe" class="auth-remember-label">
+                @Html.DisplayNameFor(m => m.Input.RememberMe)
+            </label>
+        </div>
+
+        <button id="login-submit" type="submit" class="ts-btn auth-btn-big">Log in</button>
+
+        <div class="auth-links">
+            <a asp-page="./ForgotPassword">Forgot your password?</a>
+            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Create a new account</a>
+            <a asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

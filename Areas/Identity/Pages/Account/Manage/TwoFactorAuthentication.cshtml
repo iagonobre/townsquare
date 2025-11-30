@@ -1,0 +1,72 @@
+﻿@page
+@using Microsoft.AspNetCore.Http.Features
+@model TwoFactorAuthenticationModel
+@{
+    ViewData["Title"] = "Two-factor authentication";
+    ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+}
+
+<h3 class="manage-title">@ViewData["Title"]</h3>
+
+<partial name="_StatusMessage" for="StatusMessage" />
+
+<div class="manage-container">
+
+    @if ((HttpContext.Features.Get<ITrackingConsentFeature>()?.CanTrack ?? true))
+    {
+        @* Recovery code warnings *@
+        @if (Model.Is2faEnabled)
+        {
+            @if (Model.RecoveryCodesLeft == 0)
+            {
+                <div class="manage-status-error">
+                    You have no recovery codes left.
+                    <a asp-page="./GenerateRecoveryCodes">Generate new codes</a>.
+                </div>
+            }
+            else if (Model.RecoveryCodesLeft <= 3)
+            {
+                <div class="manage-status-error">
+                    You have @Model.RecoveryCodesLeft recovery codes left.
+                    <a asp-page="./GenerateRecoveryCodes">Generate new codes</a>.
+                </div>
+            }
+
+            @if (Model.IsMachineRemembered)
+            {
+                <form method="post">
+                    <button type="submit" class="manage-btn-purple">Forget this browser</button>
+                </form>
+            }
+
+            <div class="manage-actions">
+                <a asp-page="./Disable2fa" class="manage-btn-purple">Disable 2FA</a>
+                <a asp-page="./GenerateRecoveryCodes" class="manage-btn-purple">Reset recovery codes</a>
+            </div>
+        }
+
+        <h4 class="manage-subtitle">Authenticator app</h4>
+
+        @if (!Model.HasAuthenticator)
+        {
+            <a asp-page="./EnableAuthenticator" class="manage-btn-purple">Add authenticator app</a>
+        }
+        else
+        {
+            <div class="manage-actions">
+                <a asp-page="./EnableAuthenticator" class="manage-btn-purple">Set up authenticator app</a>
+                <a asp-page="./ResetAuthenticator" class="manage-btn-purple">Reset authenticator app</a>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="manage-status-error">
+            You must accept the cookie policy before enabling two-factor authentication.
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

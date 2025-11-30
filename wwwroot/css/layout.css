@@ -1,12 +1,7 @@
 .ts-header {
     width: 100%;
     padding: 2rem 0;
-}
-
-.page-container-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    background: #fff;
 }
 
 .ts-header-inner {
@@ -33,10 +28,6 @@
 
 .ts-menu .active {
     font-weight: 700;
-}
-
-.ts-menu a {
-    font-weight: 500;
 }
 
 .ts-menu-pages {
@@ -75,4 +66,5 @@
     font-size: 1.4rem;
     cursor: pointer;
     margin-left: 1rem;
+    padding: 0;
 }

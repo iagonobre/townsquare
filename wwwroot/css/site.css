@@ -1,21 +1,5 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 62.5%;
-}
-
-body {
-    font-family: "Outfit", sans-serif;
-    font-size: 1.6rem; 
-    background-color: #ffffff;
-    -webkit-font-smoothing: antialiased;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
+@import "base.css";
+@import "components.css";
+@import "layout.css";
+@import "auth.css";
+@import "profile.css";

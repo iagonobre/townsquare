@@ -1,0 +1,63 @@
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 1px solid #C6BBFA;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    background: #fff;
+    transition: 0.2s ease-in-out;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #7848F3;
+    box-shadow: 0 0 0 3px rgba(120,72,243,0.25);
+    outline: none;
+}
+
+label {
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.ts-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #7848F3;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.ts-btn:hover {
+    background: #5927d4;
+}
+
+.ts-btn:active {
+    transform: scale(0.97);
+}
+
+.card,
+.form-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #E1DBFF;
+    padding: 2rem;
+    box-shadow: 0 0 6px rgba(0,0,0,0.04);
+}
+
+button,
+input[type="submit"],
+input[type="button"] {
+    font-family: inherit;
+    font-size: inherit;
+}
