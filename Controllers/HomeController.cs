@@ -19,10 +19,9 @@ public class HomeController : Controller
         _context = context;
     }
 
-    public IActionResult Index(string? search, string? category, string? city)
+    public async Task<IActionResult> Index(string? search, string? category, string? country, string? region)
     {
         var eventsQuery = _context.Events
-            .Include(e => e.Rsvps)    
             .OrderBy(e => e.Date)
             .AsQueryable();
 
@@ -32,19 +31,27 @@ public class HomeController : Controller
         if (!string.IsNullOrWhiteSpace(category))
             eventsQuery = eventsQuery.Where(e => e.Category == category);
 
-        if (!string.IsNullOrWhiteSpace(city))
-            eventsQuery = eventsQuery.Where(e => e.Country == city);
+        if (!string.IsNullOrWhiteSpace(country))
+            eventsQuery = eventsQuery.Where(e => e.Country == country);
+
+        if (!string.IsNullOrWhiteSpace(region))
+            eventsQuery = eventsQuery.Where(e => e.Region == region);
 
         var eventsList = eventsQuery.ToList();
 
-        var cities = _context.Events
+        ViewBag.Countries = _context.Events
             .Select(e => e.Country)
-            .Where(c => c != null && c != "")
+            .Where(c => !string.IsNullOrEmpty(c))
             .Distinct()
             .OrderBy(c => c)
             .ToList();
 
-        ViewBag.Cities = cities;
+        ViewBag.Regions = _context.Events
+            .Select(e => e.Region)
+            .Where(r => !string.IsNullOrEmpty(r))
+            .Distinct()
+            .OrderBy(r => r)
+            .ToList();
 
         return View(eventsList);
     }

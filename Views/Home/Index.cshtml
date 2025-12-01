@@ -44,16 +44,28 @@
             <option>Other</option>
         </select>
 
-        <select name="city" class="home-select">
-            <option value="">City</option>
+        <select name="country" class="home-select">
+            <option value="">Country</option>
 
-            @foreach (var c in ViewBag.Cities as List<string>)
+            @foreach (var c in ViewBag.Countries as List<string>)
             {
-                <option value="@c" selected="@(Context.Request.Query["city"] == c ? "selected" : null)">
+                <option value="@c" selected="@(Context.Request.Query["country"] == c ? "selected" : null)">
                     @c
                 </option>
             }
         </select>
+
+        <select name="region" class="home-select">
+            <option value="">Region</option>
+
+            @foreach (var r in ViewBag.Regions as List<string>)
+            {
+                <option value="@r" selected="@(Context.Request.Query["region"] == r ? "selected" : null)">
+                    @r
+                </option>
+            }
+        </select>
+
 
         <button type="submit" class="home-search-btn">
             <img src="~/icons/search.svg" />
