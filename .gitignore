@@ -24,3 +24,5 @@ obj/
 
 # Published output
 wwwroot/lib/
+config.bat
+node_modules
