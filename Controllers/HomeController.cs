@@ -22,6 +22,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index(string? search, string? category, string? country, string? region)
     {
         var eventsQuery = _context.Events
+            .Include(e => e.Rsvps)
             .OrderBy(e => e.Date)
             .AsQueryable();
 
