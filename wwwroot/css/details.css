@@ -98,3 +98,31 @@
 .details-see-who-btn:hover {
     background: #d9caff;
 }
+
+@media (max-width: 900px) {
+    .details-layout {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .details-box {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .details-banner {
+        height: 260px; 
+    }
+
+    .details-title {
+        font-size: 2.3rem;
+        text-align: center;
+    }
+
+    .details-description,
+    .details-category {
+        text-align: center;
+    }
+}
+

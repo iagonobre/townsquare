@@ -142,3 +142,39 @@
 
     font-size: 0;
 }
+
+
+@media (max-width: 900px) {
+
+    .ts-header-inner {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .ts-menu {
+        flex-wrap: wrap;
+    }
+
+    .ts-menu-pages {
+        flex-wrap: wrap;
+        gap: 1.4rem;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .ts-header-inner {
+        padding: 0 1rem;
+    }
+
+    .ts-menu {
+        gap: 0.8rem;
+    }
+
+    .ts-icon-btn img {
+        max-width: 36px;
+        height: auto;
+    }
+}
+

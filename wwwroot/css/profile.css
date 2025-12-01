@@ -221,3 +221,17 @@
     color: #111;
 }
 
+
+@media (max-width: 768px) {
+    .manage-container {
+        width: 100%;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .manage-actions {
+        width: 100%;
+        align-items: stretch;
+    }
+}
