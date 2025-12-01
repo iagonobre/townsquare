@@ -68,7 +68,12 @@
                     <p class="event-card-description">@ev.Description</p>
 
                     <div class="event-card-buttons">
-                        <button class="event-card-btn">View RSVP List</button>
+                        <a asp-controller="Event"
+                           asp-action="Attendees"
+                           asp-route-id="@ev.Id"
+                           class="event-card-btn">
+                            View RSVP List
+                        </a>
                         <a asp-controller="Event"
                            asp-action="Edit"
                            asp-route-id="@ev.Id"

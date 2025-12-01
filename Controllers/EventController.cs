@@ -147,4 +147,61 @@ public class EventController : Controller
 
         return RedirectToAction("MyEvents");
     }
+    
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> RSVP(int id)
+    {
+        var userId = _userManager.GetUserId(User)!;
+
+        var already = await _context.Rsvps
+            .FirstOrDefaultAsync(r => r.EventId == id && r.UserId == userId);
+
+        if (already == null)
+        {
+            _context.Rsvps.Add(new RSVP
+            {
+                EventId = id,
+                UserId = userId
+            });
+
+            await _context.SaveChangesAsync();
+        }
+
+        return RedirectToAction("Details", new { id });
+    }
+
+
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> CancelRSVP(int id)
+    {
+        var userId = _userManager.GetUserId(User)!;
+
+        var rsvp = await _context.Rsvps
+            .FirstOrDefaultAsync(r => r.EventId == id && r.UserId == userId);
+
+        if (rsvp != null)
+        {
+            _context.Rsvps.Remove(rsvp);
+            await _context.SaveChangesAsync();
+        }
+
+        return RedirectToAction("Details", new { id });
+    }
+    
+    [Authorize]
+    public async Task<IActionResult> Attendees(int id)
+    {
+        var ev = await _context.Events
+            .Include(e => e.Rsvps)
+            .ThenInclude(r => r.User)
+            .FirstOrDefaultAsync(e => e.Id == id);
+
+        if (ev == null)
+            return NotFound();
+
+        return View(ev);
+    }
+
 }

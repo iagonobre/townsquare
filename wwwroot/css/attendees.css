@@ -1,0 +1,41 @@
+
+.attendees-container {
+    max-width: 720px;
+    margin: 2rem auto;
+}
+
+.attendees-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.attendees-empty {
+    font-size: 1.6rem;
+    color: #666;
+}
+
+.attendees-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.attendee-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    background: #F0F0FC;
+    border: 1px solid #E1DBFF;
+    border-radius: 12px;
+    padding: 1rem 1.4rem;
+    margin-bottom: 1rem;
+
+    font-size: 1.6rem;
+}
+
+.attendee-icon  {
+    width: 24px;
+    height: 24px;
+}

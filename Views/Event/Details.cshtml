@@ -1,0 +1,82 @@
+@model Townsquare.Models.Event
+
+@{
+    ViewData["Title"] = Model.Title;
+
+    var userId = User.Identity.IsAuthenticated
+        ? User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
+        : null;
+
+    var isGoing = Model.Rsvps.Any(r => r.UserId == userId);
+}
+
+<div class="event-details-container">
+    <img src="@Model.ImageUrl" class="details-banner" alt="@Model.Title" />
+    
+    <div class="details-layout">
+
+        <div class="details-main">
+            <h1 class="details-title">@Model.Title</h1>
+            <p class="details-description">@Model.Description</p>
+            <p class="details-category">
+                <strong>Category:</strong> @Model.Category
+            </p>
+
+        </div>
+
+        <div class="details-right-column">
+            <div class="details-box">
+                <h3>Date & Time</h3>
+                <p>
+                    @Model.Date.ToString("dddd, MMM dd, yyyy 'at' HH:mm")<br />
+                    <span>Location: @Model.Address, @Model.Region @Model.Country</span>
+                </p>
+
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <button class="details-btn disabled" disabled>
+                        Sign in to join the event
+                    </button>
+                }
+                else if (Model.Date < DateTime.Now)
+                {
+                    <button class="details-btn disabled" disabled>
+                        Event Ended
+                    </button>
+                }
+                else if (!isGoing)
+                {
+                    <form method="post" asp-action="RSVP" asp-route-id="@Model.Id">
+                        <button class="details-btn going">I'm Going</button>
+                    </form>
+                }
+                else
+                {
+                    <form method="post" asp-action="CancelRSVP" asp-route-id="@Model.Id">
+                        <button class="details-btn cancel">Cancel RSVP</button>
+                    </form>
+                }
+            </div>
+
+            <div class="details-going-row">
+                @if (Model.Rsvps.Count == 0)
+                {
+                    <span class="details-going-count">No one is going yet</span>
+                }
+                else
+                {
+                    <span class="details-going-count">@Model.Rsvps.Count people are going</span>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-action="Attendees"
+                           asp-route-id="@Model.Id"
+                           class="details-see-who-btn">
+                            See Who
+                        </a>
+                    }
+                }
+            </div>
+        </div> 
+    </div> 
+</div>

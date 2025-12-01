@@ -46,6 +46,8 @@
     overflow: hidden;
     border-radius: 14px;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .event-card-banner img {
@@ -113,6 +115,7 @@
     display: flex;
     gap: 1rem;
     padding: 1.2rem 1.4rem 1.6rem;
+    margin-top: auto;
 }
 
 .event-card-btn {

@@ -1,0 +1,100 @@
+.event-details-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.details-banner {
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-top: 1rem;
+}
+
+.details-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.details-main {
+    flex: 1;
+}
+
+.details-title {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.details-description {
+    color: #444;
+    margin: 1rem 0 2rem 0;
+}
+
+.details-category {
+    color: #555;
+}
+
+.details-box {
+    width: 300px;
+    background: #F0F0FC;
+    padding: 2rem;
+    border-radius: 16px;
+}
+
+.details-box h3 {
+    margin-bottom: 1rem;
+}
+
+.details-btn {
+    width: 100%;
+    padding: 1rem 1.4rem;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: .2s;
+    margin-top: 2rem;
+}
+
+.details-btn.disabled {
+    background: #D9D9D9;
+    color: #555;
+    cursor: not-allowed;
+}
+
+.details-btn.going {
+    background: #7A4FF3;
+    color: white;
+}
+
+.details-btn.cancel {
+    background: #FFE6E6;
+    color: #C62828;
+}
+
+.details-going-row {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.details-going-count {
+    font-size: 1.4rem;
+    color: #555;
+    margin-right: 1rem;
+}
+
+.details-see-who-btn {
+    background: #EAE6FF;
+    color: #6A3BE0;
+    padding: 0.7rem 1.4rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+}
+
+.details-see-who-btn:hover {
+    background: #d9caff;
+}

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Townsquare.Data;
 using Townsquare.Models;
 
@@ -21,6 +22,7 @@ public class HomeController : Controller
     public IActionResult Index(string? search, string? category, string? city)
     {
         var eventsQuery = _context.Events
+            .Include(e => e.Rsvps)    
             .OrderBy(e => e.Date)
             .AsQueryable();
 

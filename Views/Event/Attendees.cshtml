@@ -1,0 +1,27 @@
+@model Townsquare.Models.Event
+
+@{
+    ViewData["Title"] = "Attendees for " + Model.Title;
+}
+
+<div class="attendees-container">
+
+    <h1 class="attendees-title">@Model.Title – Who's Going</h1>
+
+    @if (Model.Rsvps.Count == 0)
+    {
+        <p class="attendees-empty">No one is going yet.</p>
+    }
+    else
+    {
+        <ul class="attendees-list">
+            @foreach (var r in Model.Rsvps)
+            {
+                <li class="attendee-item">
+                    <img src="~/icons/attendee.svg" class="attendee-icon" />
+                    @r.User.FullName
+                </li>
+            }
+        </ul>
+    }
+</div>
