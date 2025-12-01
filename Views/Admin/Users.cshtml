@@ -1,0 +1,35 @@
+@model IEnumerable<Townsquare.Models.ApplicationUser>
+
+<div class="admin-users-container">
+
+    <h1 class="admin-users-title">Manage Users</h1>
+
+    @foreach (var user in Model)
+    {
+        <div class="admin-user-card @(user.IsDeleted ? "deleted" : "")">
+
+            <div class="admin-user-info">
+                <div style="display:flex; align-items:center;">
+                    <span class="admin-user-name">@user.FullName</span>
+
+                    @if (user.IsDeleted)
+                    {
+                        <span class="admin-user-deleted-label">(Deleted)</span>
+                    }
+                </div>
+
+                <span class="admin-user-email">@user.Email</span>
+            </div>
+
+            @if (!user.IsDeleted)
+            {
+                <form asp-action="DeleteUser" method="post">
+                    <input type="hidden" name="id" value="@user.Id" />
+                    <button type="submit" class="admin-user-delete-btn">
+                        <img src="~/icons/trash.svg" class="admin-trash-icon" />
+                    </button>
+                </form>
+            }
+        </div>
+    }
+</div>

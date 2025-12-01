@@ -1,0 +1,77 @@
+.admin-users-container {
+    max-width: 720px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.admin-users-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #222;
+}
+
+.admin-user-card {
+    background: #FFFFFF;
+    border: 1px solid #E1DBFF;
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    transition: 0.15s ease-in-out;
+}
+
+.admin-user-card:hover {
+    background: #F7F5FF;
+}
+
+.admin-user-card.deleted {
+    opacity: 0.55;
+    background: #F8F8F8;
+}
+
+.admin-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-user-name {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+}
+
+.admin-user-email {
+    font-size: 1.3rem;
+    color: #666;
+    margin-top: .2rem;
+}
+
+.admin-user-deleted-label {
+    font-size: 1.2rem;
+    margin-left: 8px;
+    color: #B30000;
+}
+
+.admin-user-delete-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: .4rem;
+    transition: 0.15s;
+}
+
+.admin-user-delete-btn:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.3);
+}
+
+.admin-trash-icon {
+    width: 22px;
+    height: 22px;
+}

@@ -7,7 +7,19 @@
 @{
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
     var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+    bool isAdmin = false;
+
+    if (SignInManager.IsSignedIn(User))
+    {
+        var currentUser = await UserManager.GetUserAsync(User);
+        if (currentUser != null)
+        {
+            isAdmin = await UserManager.IsInRoleAsync(currentUser, "Admin");
+        }
+    }
 }
+
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -22,6 +34,14 @@
                class="@(currentController == "Event" && currentAction == "MyEvents" ? "active" : "")">
                 My Events
             </a>
+            
+            @if (isAdmin)
+            {
+                <a asp-controller="Admin" asp-action="Users"
+                   class="@(currentController == "Admin" ? "active" : "")">
+                    Users
+                </a>
+            }
         </div>
       
 
