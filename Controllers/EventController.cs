@@ -159,13 +159,29 @@ public class EventController : Controller
 
         if (already == null)
         {
+            var ev = await _context.Events
+                .Include(e => e.Creator)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (ev == null)
+                return NotFound();
+
             _context.Rsvps.Add(new RSVP
             {
                 EventId = id,
                 UserId = userId
             });
 
+            _context.Notifications.Add(new Notification
+            {
+                UserId = ev.CreatorId,
+                Title = $"New RSVP - {ev.Title}",
+                Description = $"{User.Identity.Name} joined your event."
+            });
+
+
             await _context.SaveChangesAsync();
+
         }
 
         return RedirectToAction("Details", new { id });
