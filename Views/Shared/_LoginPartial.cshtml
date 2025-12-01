@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@inject Townsquare.Data.ApplicationDbContext Db
+
 
 @{
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
@@ -23,8 +25,19 @@
         </div>
       
 
-        <a asp-controller="Notification" asp-action="Index" class="ts-icon-btn">
+        <a asp-controller="Notification" asp-action="Index" class="ts-icon-btn notification-wrapper">
             <img src="~/icons/bell.svg" alt="Notifications"/>
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                var userId = UserManager.GetUserId(User);
+                var unread = Db.Notifications.Count(n => !n.IsRead && n.UserId == userId);
+
+                if (unread > 0)
+                {
+                    <span class="notification-badge">@unread</span>
+                }
+            }
         </a>
 
         <a asp-area="Identity" asp-page="/Account/Manage/Index" class="ts-icon-btn ts-profile-btn">

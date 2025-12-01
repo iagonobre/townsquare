@@ -1,0 +1,30 @@
+@model IEnumerable<Townsquare.Models.Notification>
+
+<div class="notifications-container">
+
+    <h1 class="notifications-title">Notifications</h1>
+
+    @if (!Model.Any())
+    {
+        <p class="notifications-empty">You have no notifications.</p>
+    }
+    else
+    {
+        <ul class="notifications-list">
+
+            @foreach (var n in Model)
+            {
+                <li class="notification-item @(n.IsRead ? "" : "unread")">
+
+                    <span class="notification-title">@n.Title</span>
+                    <p class="notification-description">@n.Description</p>
+                    <span class="notification-date">
+                        @n.CreatedAt.ToLocalTime().ToString("MMM dd yyyy HH:mm")
+                    </span>
+                </li>
+            }
+
+        </ul>
+    }
+
+</div>

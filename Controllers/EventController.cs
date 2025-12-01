@@ -4,8 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Townsquare.Data;
 using Townsquare.Models;
+using System.Net.Http.Json;
 
 namespace Townsquare.Controllers;
+
+public class CountryResponse
+{
+    public Name name { get; set; }
+}
+
+public class Name
+{
+    public string common { get; set; }
+}
+
 
 [Authorize]
 public class EventController : Controller
@@ -19,10 +31,27 @@ public class EventController : Controller
         _userManager = userManager;
     }
 
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
+        ViewBag.Countries = await GetCountriesAsync();
         return View();
     }
+
+    
+    private async Task<List<string>> GetCountriesAsync()
+    {
+        var http = new HttpClient();
+
+        var data = await http.GetFromJsonAsync<List<CountryResponse>>(
+            "https://restcountries.com/v3.1/all?fields=name"
+        );
+
+        return data!
+            .Select(c => c.name.common)
+            .OrderBy(n => n)
+            .ToList();
+    }
+
     
     [HttpPost]
     public async Task<IActionResult> Create(Event model, IFormFile imageFile)
@@ -33,7 +62,11 @@ public class EventController : Controller
         }
 
         if (!ModelState.IsValid)
+        {
+            ViewBag.Countries = await GetCountriesAsync();
             return View(model);
+        }
+
 
         var fileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
@@ -76,8 +109,10 @@ public class EventController : Controller
         if (ev.CreatorId != _userManager.GetUserId(User))
             return Forbid();
 
+        ViewBag.Countries = await GetCountriesAsync();
         return View(ev);
     }
+
 
     [HttpPost]
     public async Task<IActionResult> Edit(int id, Event model, IFormFile? imageFile)
@@ -90,7 +125,11 @@ public class EventController : Controller
             return NotFound();
 
         if (!ModelState.IsValid)
+        {
+            ViewBag.Countries = await GetCountriesAsync();
             return View(model);
+        }
+
 
         if (imageFile != null && imageFile.Length > 0)
         {

@@ -74,8 +74,24 @@
         <div class="create-row">
             <div class="create-field">
                 <label class="create-label">Country</label>
-                <input asp-for="Country" class="create-input" />
+                <select asp-for="Country" class="create-input">
+                    <option value="">Select a country</option>
+
+                    @foreach (var c in (List<string>)ViewBag.Countries)
+                    {
+                        if (Model.Country == c)
+                        {
+                            <option value="@c" selected="selected">@c</option>
+                        }
+                        else
+                        {
+                            <option value="@c">@c</option>
+                        }
+                    }
+                </select>
+
                 <span asp-validation-for="Country" class="validation-error"></span>
+
             </div>
 
             <div class="create-field">
